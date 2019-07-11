@@ -87,7 +87,35 @@ curl --request GET \
 Request output (truncated)
 
 ```json
-{"message": "Code found at the database", "status": true, "words": [{"name": "periferia", "weight": 2}, {"name": "gente", "weight": 57}, {"name": "assim", "weight": 26}, {"name": "regi\u00e3o", "weight": 3}, {"name": "bras\u00edlia", "weight": 7}, {"name": "ent\u00e3o", "weight": 18}, {"name": "computa\u00e7\u00e3o", "weight": 2}, {"name": "comecei", "weight": 11}, {"name": "pessoal", "weight": 15}, {"name": "ligando", "weight": 2}, {"name": "maria", "weight": 10}, {"name": "jesus", "weight": 3}, {"name": "ajudar", "weight": 2}, {"name": "tal", "weight": 9}, {"name": "vou", "weight": 22}, {"name": "conhecer", "weight": 4}, {"name": "realidade", "weight": 6}, {"name": "forma", "weight": 6}, {"name": "sim", "weight": 3}, {"name": "hoje", "weight": 7}, {"name": "tava", "weight": 11}, {"name": "nenhuma", "weight": 3}, {"name": "fam\u00edlia", "weight": 3}, {"name": "fez", "weight": 3}, {"name": "sa\u00edda", "weight": 2}, {"name": "neg\u00f3cio", "weight": 9}, {"name": "sabe", "weight": 11}, {"name": "fica", "weight": 9}]}
+{"message": "Code found at the database", "status": true, "words": 
+[{"name": "periferia", "weight": 2}, 
+{"name": "gente", "weight": 57}, 
+{"name": "assim", "weight": 26}, 
+{"name": "regi\u00e3o", "weight": 3}, 
+{"name": "bras\u00edlia", "weight": 7}, 
+{"name": "ent\u00e3o", "weight": 18}, 
+{"name": "computa\u00e7\u00e3o", "weight": 2}, 
+{"name": "comecei", "weight": 11}, 
+{"name": "pessoal", "weight": 15}, 
+{"name": "ligando", "weight": 2}, 
+{"name": "maria", "weight": 10}, 
+{"name": "jesus", "weight": 3}, 
+{"name": "ajudar", "weight": 2}, 
+{"name": "tal", "weight": 9}, 
+{"name": "vou", "weight": 22}, 
+{"name": "conhecer", "weight": 4}, 
+{"name": "realidade", "weight": 6}, 
+{"name": "forma", "weight": 6}, 
+{"name": "sim", "weight": 3}, 
+{"name": "hoje", "weight": 7}, 
+{"name": "tava", "weight": 11}, 
+{"name": "nenhuma", "weight": 3}, 
+{"name": "fam\u00edlia", "weight": 3}, 
+{"name": "fez", "weight": 3}, 
+{"name": "sa\u00edda", "weight": 2}, 
+{"name": "neg\u00f3cio", "weight": 9}, 
+{"name": "sabe", "weight": 11}, 
+{"name": "fica", "weight": 9}]}
 ```
 
 *getFacialAnalysis*: get the emotions of the meeting accross the time. 
@@ -117,7 +145,40 @@ curl --request GET \
 Request output (truncated)
 
 ```json
-{"message": "Code found at the database", "status": true, "facialTimeAnalysis": [{"timestamp": 1560850260, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560850320, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560850380, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560850380, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560850740, "value": 1.0, "persons": 1, "emotion": {"positive": 1.0, "neutral": 0.0, "negative": 0.0}}, {"timestamp": 1560852180, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560852480, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560852540, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560852780, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560852840, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560852840, "value": 0, "persons": 2, "emotion": {"positive": 0.443, "neutral": 0.557, "negative": 0.0}}, {"timestamp": 1560852900, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560852960, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560853020, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560853020, "value": 0, "persons": 1, "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, {"timestamp": 1560853080, "value": 1.0, "persons": 1, "emotion": {"positive": 1.0, "neutral": 0.0, "negative": 0.0}}]}
+{"message": "Code found at the database", "status": true, 
+"facialTimeAnalysis": [
+    {"timestamp": 1560850260, "value": 0, "persons": 1, "emotion": 
+    {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560850320, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560850380, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560850380, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560850740, "value": 1.0, "persons": 1, 
+    "emotion": {"positive": 1.0, "neutral": 0.0, "negative": 0.0}}, 
+    {"timestamp": 1560852180, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560852480, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560852540, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560852780, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560852840, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560852840, "value": 0, "persons": 2, 
+    "emotion": {"positive": 0.443, "neutral": 0.557, "negative": 0.0}}, 
+    {"timestamp": 1560852900, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560852960, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560853020, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560853020, "value": 0, "persons": 1, 
+    "emotion": {"positive": 0.0, "neutral": 1.0, "negative": 0.0}}, 
+    {"timestamp": 1560853080, "value": 1.0, "persons": 1, 
+    "emotion": {"positive": 1.0, "neutral": 0.0, "negative": 0.0}}]}
 ```
 
 *queueImaging: is triggered by ```reaction-imaging``` queue. Each entry of the queue has the file details in order to download and process to face analysis API.
