@@ -1,0 +1,12 @@
+# Minimum packages for azure functions
+azure-functions
+azure-functions-worker
+grpcio~=1.20.1
+grpcio-tools~=1.20.1
+protobuf==3.6.1
+six==1.11.0
+
+# Additional packages
+azure-storage==0.36.0
+nltk==3.4.1
+requests==2.22.0
