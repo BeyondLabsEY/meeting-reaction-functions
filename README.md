@@ -2,6 +2,12 @@
 
 These functions are used to be the back-end (API) for processing request from front-end and IoT device (Raspberry Pi).
 
+## Solution components
+
+- [x] Back-end Azure Functions 2 (this)
+- [x] Front-end React ([repo](https://github.com/BeyondLabsEY/meeting-reaction-web))
+- [x] Desktop Python 3 app ([repo](https://github.com/BeyondLabsEY/meeting-reaction-rasp))
+
 ## Infrastructure Requirements
 
 - [x] Azure account
