@@ -56,11 +56,11 @@ Replace the following keys for each value:
 - APPINSIGHTS_INSTRUMENTATIONKEY _optional_: API key of Application Insights service (helps a lot for debugging 😝)
 - FACE_ANALYSIS_SUBSCRIPTION_KEY: API key of Face Analysis service.
 
-### Function
+### Functions
 
 Each function has different ways to access, some are triggerd by queue item other simple by get requests.
 
-*getWordCloud*: get the most spoken words of the meeting by giving a meeting code. 
+* *getWordCloud*: get the most spoken words of the meeting by giving a meeting code. 
 
 Request example using Postman
 
