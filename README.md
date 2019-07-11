@@ -118,7 +118,7 @@ Request output (truncated)
 {"name": "fica", "weight": 9}]}
 ```
 
-*getFacialAnalysis*: get the emotions of the meeting accross the time. 
+* *getFacialAnalysis*: get the emotions of the meeting accross the time. 
 
 Request example using Postman
 
@@ -181,9 +181,9 @@ Request output (truncated)
     "emotion": {"positive": 1.0, "neutral": 0.0, "negative": 0.0}}]}
 ```
 
-*queueImaging: is triggered by ```reaction-imaging``` queue. Each entry of the queue has the file details in order to download and process to face analysis API.
+* *queueImaging*: is triggered by ```reaction-imaging``` queue. Each entry of the queue has the file details in order to download and process to face analysis API.
 
-*queueRecording: is triggered by ```reaction-recording``` queue. Each entry of the queue has the file details in order to download and process to speech to text API.
+* *queueRecording*: is triggered by ```reaction-recording``` queue. Each entry of the queue has the file details in order to download and process to speech to text API.
 
 ### Core SDK
 
