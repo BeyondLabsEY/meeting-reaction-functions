@@ -10,7 +10,7 @@ These functions are used to be the back-end (API) for processing request from fr
 - [x] Azure Table
 - [x] Azure Queue
 - [x] Azure Face Recognition
-- [x] Azure Text to Speech
+- [x] Azure Text to Speech (aka _Bing Search_)
   
 ## Development Requirements
 
@@ -49,12 +49,12 @@ In development environment, you need to add a ```local.settings.json``` file usi
 
 Replace the following keys for each value:
 
-- STORAGE_ACCOUNT_NAME: Azure Blob account name
-- STORAGE_ACCOUNT_KEY: Azure blob account key from previous account name
-- CONTAINER_NAME_RECORDING: container name from previous account name responsible to receive audio and image files from IoT Device (Raspberry Pi)
-- SPEECH2TEXT_API_KEY: API key of Speech to Text service.
-- APPINSIGHTS_INSTRUMENTATIONKEY _optional_: API key of Application Insights service (helps a lot for debugging 😝)
-- FACE_ANALYSIS_SUBSCRIPTION_KEY: API key of Face Analysis service.
+- ```STORAGE_ACCOUNT_NAME```: Azure Blob account name
+- ```STORAGE_ACCOUNT_KEY```: Azure blob account key from previous account name
+- ```CONTAINER_NAME_RECORDING```: container name from previous account name responsible to receive audio and image files from IoT Device (Raspberry Pi)
+- ```SPEECH2TEXT_API_KEY```: API key of Speech to Text service.
+- ```APPINSIGHTS_INSTRUMENTATIONKEY``` _optional_: API key of Application Insights service (helps a lot for debugging 😝)
+- ```FACE_ANALYSIS_SUBSCRIPTION_KEY```: API key of Face Analysis service.
 
 ### Functions
 
