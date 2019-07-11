@@ -15,9 +15,12 @@ nltk.data.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 ACCOUNT_NAME = os.environ["STORAGE_ACCOUNT_NAME"]
 ACCOUNT_KEY = os.environ["STORAGE_ACCOUNT_KEY"]
-SPEECH2TEXT_API_KEY = os.environ["SPEECH2TEXT_API_KEY"]
 
-CONTAINER_NAME = "meeting-word-cloud"
+SPEECH2TEXT_API_KEY = os.environ["SPEECH2TEXT_API_KEY"]
+CONTAINER_NAME = os.environ["CONTAINER_NAME_RECORDING"]
+
+TABLE_NAME_TRACKING = os.environ["TABLE_NAME_TRACKING"]
+TABLE_NAME_API_T2S = os.environ["TABLE_NAME_API_T2S"]
 
 
 def processar_palavra_chave(lista_frase):
@@ -53,7 +56,7 @@ def main(msg: func.QueueMessage) -> None:
 
     table_service = TableService(
         account_name=ACCOUNT_NAME, account_key=ACCOUNT_KEY)
-    records = table_service.query_entities("reactionTextToSpeechAPI", filter="PartitionKey eq 'recording' and RowKey eq '" +
+    records = table_service.query_entities(TABLE_NAME_API_T2S, filter="PartitionKey eq 'recording' and RowKey eq '" +
                                            input_message["meeting-code"] + "' and RecognitionStatus eq 'Success'")
 
     if len(records.items) == 0:
@@ -103,7 +106,7 @@ def main(msg: func.QueueMessage) -> None:
             record["PartitionKey"] = input_message["meeting-code"]
             record["RowKey"] = input_message["file-name"]
             table_service.insert_or_replace_entity(
-                "reactionTextToSpeechAPI", record)
+                TABLE_NAME_API_T2S, record)
 
             logging.info("Result persisted.")
 
@@ -155,7 +158,7 @@ def main(msg: func.QueueMessage) -> None:
 
             record["FreqDist"] = freq_dist
 
-            table_service.insert_or_replace_entity("reactionTracking", record)
+            table_service.insert_or_replace_entity(TABLE_NAME_TRACKING, record)
 
             logging.info("Message processed successfully:" +
                          str(res_json["DisplayText"]))

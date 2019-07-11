@@ -11,6 +11,7 @@ import datetime
 
 ACCOUNT_NAME = os.environ["STORAGE_ACCOUNT_NAME"]
 ACCOUNT_KEY = os.environ["STORAGE_ACCOUNT_KEY"]
+TABLE_NAME_TRACKING = os.environ["TABLE_NAME_TRACKING"]
 
 # Headers para lidar com CORS pois as configurações do Azure não tem efeito no engine Python, pelo menos por enquanto :(
 headers = {
@@ -40,7 +41,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             table_service = TableService(
                 account_name=ACCOUNT_NAME, account_key=ACCOUNT_KEY)
             records = table_service.query_entities(
-                'reactionTracking', filter="PartitionKey eq 'tracking-analysis' and RowKey eq '"+code+"'")
+                TABLE_NAME_TRACKING, filter="PartitionKey eq 'tracking-analysis' and RowKey eq '"+code+"'")
 
             if len(records.items) == 0:
                 ret["message"] = "Meeting coding not found"
