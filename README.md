@@ -1,3 +1,5 @@
+<img class="center" src="images/logo_meeting_reaction.png" alt="Meeting Reaction logo" />
+
 # Meeting Reaction Functions
 
 These functions are used to be the back-end (API) for processing request from front-end and IoT device (Raspberry Pi).
