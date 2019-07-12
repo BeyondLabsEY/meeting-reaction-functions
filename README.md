@@ -1,4 +1,12 @@
-<img class="center" src="images/logo_meeting_reaction.png" alt="Meeting Reaction logo" />
+<div align="center">
+  <img src="images/logo_meeting_reaction.png" alt="Meeting Reaction logo" width="370" height="57" />
+
+  ---
+  An application for viewing instant feedback during a meeting.
+
+  This feedback can be based on people’s speech or live reactions captured through facial recongition.
+</div>
+
 
 # Meeting Reaction Functions
 
