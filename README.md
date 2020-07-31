@@ -50,10 +50,15 @@ In development environment, you need to add a ```local.settings.json``` file usi
     "WEBSITE_NODE_DEFAULT_VERSION": "10.14.1",
     "STORAGE_ACCOUNT_NAME": "",
     "STORAGE_ACCOUNT_KEY": "",
+    "STORAGE_ACCOUNT_PROCESSING": "",
     "CONTAINER_NAME_RECORDING": "",
-    "SPEECH2TEXT_API_KEY": "",
-    "APPINSIGHTS_INSTRUMENTATIONKEY": "",
-    "FACE_ANALYSIS_SUBSCRIPTION_KEY": "",
+    "AI_API_KEY": "",
+    "AI_API_REGION" : "",
+    "TABLE_NAME_API_FACE": "",
+    "TABLE_NAME_API_T2S": "",
+    "TABLE_NAME_TRACKING": "",
+    "TABLE_NAME_PARAMETERS": "",
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "",
 
   },
   "Host": {
@@ -66,11 +71,23 @@ In development environment, you need to add a ```local.settings.json``` file usi
 Replace the following keys for each value:
 
 - ```STORAGE_ACCOUNT_NAME```: Azure Blob account name
-- ```STORAGE_ACCOUNT_KEY```: Azure blob account key from previous account name
+- ```STORAGE_ACCOUNT_KEY```: Azure Blob account key from previous account name
 - ```CONTAINER_NAME_RECORDING```: container name from previous account name responsible to receive audio and image files from IoT Device (Raspberry Pi)
-- ```SPEECH2TEXT_API_KEY```: API key of Speech to Text service.
+- ```AI_API_KEY```: API key of AI Cognitive Services to Text service and Face Emotion.
+- ```AI_API_REGION```: API region, e.g. _brazilsouth_.
+- ```TABLE_NAME_API_FACE```: Azure Table name for API face emotion logs.
+- ```TABLE_NAME_API_T2S```: Azure Table name for speech to text logs.
+- ```TABLE_NAME_TRACKING```: Azure Table name for summaring all information.
+- ```TABLE_NAME_PARAMETERS```: Azure Table name for parametrization, specially to add stopwords.
 - ```APPINSIGHTS_INSTRUMENTATIONKEY``` _optional_: API key of Application Insights service (helps a lot for debugging 😝)
-- ```FACE_ANALYSIS_SUBSCRIPTION_KEY```: API key of Face Analysis service.
+
+You have to create the tables, they will be filled automatically, except the _parameters table_. For that one, create the following entry:
+
+```
+PartitionKey: "stopwords",
+RowKey: "general",
+Value: {"stopwords": ["cara", "muita", "daqui", "sai", "ali", "para", "enfim", "pode", "algo", "nessa", "é"]}
+```
 
 ### Functions
 
@@ -197,9 +214,9 @@ Request output (truncated)
     "emotion": {"positive": 1.0, "neutral": 0.0, "negative": 0.0}}]}
 ```
 
-* *queueImaging*: is triggered by ```reaction-imaging``` queue. Each entry of the queue has the file details in order to download and process to face analysis API.
+* *queueImaging*: is triggered by ```images``` queue. Each entry of the queue has the file details in order to download and process to face analysis API.
 
-* *queueRecording*: is triggered by ```reaction-recording``` queue. Each entry of the queue has the file details in order to download and process to speech to text API.
+* *queueRecording*: is triggered by ```voices``` queue. Each entry of the queue has the file details in order to download and process to speech to text API.
 
 ### Core SDK
 

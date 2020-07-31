@@ -10,6 +10,7 @@ import os
 ACCOUNT_NAME = os.environ["STORAGE_ACCOUNT_NAME"]
 ACCOUNT_KEY = os.environ["STORAGE_ACCOUNT_KEY"]
 TABLE_NAME_TRACKING = os.environ["TABLE_NAME_TRACKING"]
+TABLE_NAME_PARAMETERS = os.environ["TABLE_NAME_PARAMETERS"]
 
 # Headers para lidar com CORS pois as configurações do Azure não tem efeito no engine Python, pelo menos por enquanto :(
 headers = {
@@ -52,7 +53,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             else:
 
                 additional_stop_words = table_service.get_entity(
-                    "reactionParameters", "stopwords", "general").Value
+                    TABLE_NAME_PARAMETERS, "stopwords", "general").Value
 
                 record = records.items[0]
                 freq_dist = json.loads(record["FreqDist"])

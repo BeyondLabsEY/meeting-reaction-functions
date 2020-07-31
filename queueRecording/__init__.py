@@ -5,6 +5,8 @@ from azure.storage.table import TableService, Entity
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+import time
+from datetime import datetime
 import os
 import json
 import requests
@@ -16,11 +18,13 @@ nltk.data.path.append(os.path.dirname(os.path.abspath(__file__)))
 ACCOUNT_NAME = os.environ["STORAGE_ACCOUNT_NAME"]
 ACCOUNT_KEY = os.environ["STORAGE_ACCOUNT_KEY"]
 
-SPEECH2TEXT_API_KEY = os.environ["SPEECH2TEXT_API_KEY"]
+SPEECH2TEXT_API_KEY = os.environ["AI_API_KEY"]
 CONTAINER_NAME = os.environ["CONTAINER_NAME_RECORDING"]
 
 TABLE_NAME_TRACKING = os.environ["TABLE_NAME_TRACKING"]
 TABLE_NAME_API_T2S = os.environ["TABLE_NAME_API_T2S"]
+
+AI_API_REGION = os.environ["AI_API_REGION"]
 
 
 def processar_palavra_chave(lista_frase):
@@ -50,6 +54,9 @@ def main(msg: func.QueueMessage) -> None:
     stopwords = nltk.corpus.stopwords.words("portuguese")
 
     input_message = msg.get_body().decode('utf-8')
+
+    logging.info(input_message)
+
     input_message = json.loads(input_message)
 
     logging.info("Processing file " + input_message["blob"] + "...")
@@ -66,15 +73,19 @@ def main(msg: func.QueueMessage) -> None:
             CONTAINER_NAME, input_message["blob"], timeout=60)
         audio_bytes = blob_entry.content
 
-        url_token_api = "https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken"
+        url_token_api = "https://"+AI_API_REGION + \
+            ".api.cognitive.microsoft.com/sts/v1.0/issueToken"
         api_key = SPEECH2TEXT_API_KEY
 
         headers = {"Content-Length": "0", "Ocp-Apim-Subscription-Key": api_key}
 
+        start_time = datetime.now()
+
         api_response = requests.post(url_token_api, headers=headers)
         access_token = str(api_response.content.decode('utf-8'))
 
-        url_stt_api = "https://westus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=pt-BR"
+        url_stt_api = "https://"+AI_API_REGION + \
+            ".stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=pt-BR"
 
         headers = {"Authorization": "Bearer {0}".format(access_token),
                    "Content-Length": str(len(audio_bytes)),
@@ -89,10 +100,18 @@ def main(msg: func.QueueMessage) -> None:
         try:
             api_response = requests.post(
                 url_stt_api, headers=headers, params=None, data=audio_bytes)
+
+            end_time = datetime.now()
+            api_time = end_time - start_time
+
+            logging.info(api_response)
+
             res_json = json.loads(api_response.content.decode('utf-8'))
+
             record["RecognitionStatus"] = res_json["RecognitionStatus"]
             record["TextConverted"] = res_json["DisplayText"]
             record["ApiResponse"] = json.dumps(res_json)
+            record["ApiTimeResponseSeconds"] = api_time.seconds
 
             logging.info("Speech to text processed.")
 
@@ -119,7 +138,7 @@ def main(msg: func.QueueMessage) -> None:
             logging.info("Decoded speech: "+str(res_json["DisplayText"]))
 
             records = table_service.query_entities(
-                "reactionTracking", filter="PartitionKey eq 'tracking-analysis' and RowKey eq '"+input_message["meeting-code"]+"'")
+                TABLE_NAME_TRACKING, filter="PartitionKey eq 'tracking-analysis' and RowKey eq '"+input_message["meeting-code"]+"'")
             texts_converted = []
 
             if len(records.items) > 0:
