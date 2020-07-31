@@ -197,20 +197,20 @@ def main(msg: func.QueueMessage) -> None:
                 TABLE_NAME_TRACKING, filter="PartitionKey eq 'tracking-analysis' and RowKey eq '"+meetingCode+"'")
             texts_converted = []
 
+            new_record = True
+
             if len(records.items) > 0:
                 record = records.items[0]
+
+                if "EmotionTimeAnalysis" in records.items[0] and "EmotionCount" in records.items[0]:
+                    new_record = False
+
                 if "EmotionTimeAnalysis" in records.items[0]:
                     data_points = json.loads(record["EmotionTimeAnalysis"])
                     data_points.append(final_report)
 
                     file_processeds = json.loads(record["FacialAnalysis"])
                     file_processeds.append(file_processed)
-                else:
-                    data_points = [final_report]
-                    file_processeds = [file_processed]
-
-                    record["FacialAnalysis"] = json.dumps(file_processeds)
-                    record["EmotionTimeAnalysis"] = json.dumps(data_points)
 
                 if "EmotionCount" in records.items[0]:
                     emotional_count = json.loads(record["EmotionCount"])
@@ -231,9 +231,10 @@ def main(msg: func.QueueMessage) -> None:
                     emotional_count["negative_percentage"] = round(
                         100*emotional_count["negative"]/emotional_count_value, 3)
 
-            else:
+            if new_record:
                 record = {"PartitionKey": "tracking-analysis",
                           "RowKey": meetingCode}
+
                 data_points = [final_report]
                 file_processeds = [file_processed]
 
@@ -251,6 +252,8 @@ def main(msg: func.QueueMessage) -> None:
             record["FacialAnalysis"] = json.dumps(file_processeds)
             record["EmotionTimeAnalysis"] = json.dumps(data_points)
             record["EmotionCount"] = json.dumps(emotional_count)
+
+            logging.info(record)
 
             table_service.insert_or_replace_entity(TABLE_NAME_TRACKING, record)
     else:
